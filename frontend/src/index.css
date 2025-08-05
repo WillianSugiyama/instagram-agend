@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Instagram Agent Design System */
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 0 0% 100%;
+    --foreground: 210 24% 16%;
+    
+    /* Instagram-inspired primary gradient (purple to pink) */
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --primary-gradient: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 81% 60%));
+    
+    /* Secondary (blue) */
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Backgrounds */
+    --background-light: 210 20% 98%;
+    --background-subtle: 210 17% 95%;
+    
+    /* Text colors */
+    --text-primary: 210 24% 16%;
+    --text-secondary: 210 11% 43%;
+    --text-muted: 210 9% 53%;
+    
+    /* Success and error */
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 100%;
+    
+    /* Card and surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 210 24% 16%;
+    --card-hover: 210 20% 98%;
+    
+    /* Borders and inputs */
+    --border: 214 20% 90%;
+    --border-hover: 214 25% 85%;
+    --input: 214 20% 90%;
+    --input-focus: 258 90% 66%;
+    
+    /* Interactive states */
+    --ring: 258 90% 66%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 24% 16%;
+    
+    /* Shadows */
+    --shadow-soft: 0 1px 3px 0 hsl(210 24% 16% / 0.1), 0 1px 2px 0 hsl(210 24% 16% / 0.06);
+    --shadow-medium: 0 4px 6px -1px hsl(210 24% 16% / 0.1), 0 2px 4px -1px hsl(210 24% 16% / 0.06);
+    --shadow-large: 0 10px 15px -3px hsl(210 24% 16% / 0.1), 0 4px 6px -2px hsl(210 24% 16% / 0.05);
+    
+    /* Instagram-style elements */
+    --hashtag-bg: 217 91% 95%;
+    --hashtag-text: 217 91% 40%;
+    --selection-primary: 258 90% 66%;
+    --selection-secondary: 330 81% 60%;
+    
+    /* Design system tokens */
+    --radius: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+    
+    /* Animation durations */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+    
+    /* Spacing scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Base colors */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    
+    /* Primary gradient (same for dark mode) */
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --primary-gradient: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 81% 60%));
+    
+    /* Secondary */
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Dark backgrounds */
+    --background-light: 222.2 84% 6%;
+    --background-subtle: 217.2 32.6% 12%;
+    
+    /* Dark text colors */
+    --text-primary: 210 40% 98%;
+    --text-secondary: 215 20.2% 65.1%;
+    --text-muted: 215 16.3% 46.9%;
+    
+    /* Success and error (same) */
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 100%;
+
+    /* Dark surfaces */
+    --card: 222.2 84% 6%;
+    --card-foreground: 210 40% 98%;
+    --card-hover: 217.2 32.6% 8%;
+    
+    /* Dark borders */
+    --border: 217.2 32.6% 17.5%;
+    --border-hover: 217.2 32.6% 22%;
+    --input: 217.2 32.6% 17.5%;
+    --input-focus: 258 90% 66%;
+    
+    /* Interactive states */
+    --ring: 258 90% 66%;
+    --popover: 222.2 84% 6%;
+    --popover-foreground: 210 40% 98%;
+    
+    /* Dark hashtags */
+    --hashtag-bg: 217 91% 15%;
+    --hashtag-text: 217 91% 70%;
+    
+    /* Sidebar (existing) */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Instagram Agent Components */
+  .gradient-primary {
+    background: var(--primary-gradient);
+  }
+  
+  .text-gradient {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .card-hover {
+    transition: all var(--duration-normal) ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+  }
+  
+  .hashtag {
+    @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded-full;
+    background-color: hsl(var(--hashtag-bg));
+    color: hsl(var(--hashtag-text));
+  }
+  
+  .content-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-all duration-200;
+  }
+  
+  .content-card:hover {
+    @apply border-border-hover shadow-medium;
+  }
+  
+  .content-card.selected {
+    @apply border-primary shadow-medium;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.02), hsl(var(--secondary) / 0.02));
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200;
+    background: var(--primary-gradient);
+    color: hsl(var(--primary-foreground));
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg border border-border bg-background transition-all duration-200;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-card-hover border-border-hover;
+  }
+  
+  .toggle-group {
+    @apply inline-flex rounded-lg border border-border bg-background p-1;
+  }
+  
+  .toggle-item {
+    @apply flex items-center justify-center px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 cursor-pointer;
+  }
+  
+  .toggle-item:hover {
+    @apply bg-card-hover;
+  }
+  
+  .toggle-item.active {
+    @apply text-primary-foreground;
+    background: var(--primary-gradient);
+  }
+}
