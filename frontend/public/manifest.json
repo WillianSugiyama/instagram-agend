@@ -1,0 +1,16 @@
+{
+  "name": "Instagram Agent",
+  "short_name": "IG Agent",
+  "description": "AI-powered Instagram content generator",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF6B9D",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
