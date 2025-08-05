@@ -1,2 +1,50 @@
+# Environment files
 .env
+.env.*
+!.env.example
+.env.local
+.env.production
+.env.development
+
+# Claude AI files
 .claude
+CLAUDE.md
+.claude/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Docker
+docker-compose.override.yml
+
+# Backup files
+*.backup
+*.bak
+backup-before-clean
