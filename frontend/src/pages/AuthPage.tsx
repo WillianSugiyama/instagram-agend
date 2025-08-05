@@ -3,18 +3,20 @@ import { Camera, Mail, Lock, User, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useSignup, useLogin } from '@/hooks/useAuth';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
   const { toast } = useToast();
+  const signupMutation = useSignup();
+  const loginMutation = useLogin();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -25,7 +27,6 @@ const AuthPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
     // Basic validation
     if (!formData.email || !formData.password) {
@@ -34,7 +35,6 @@ const AuthPage = () => {
         description: "Please fill in all fields.",
         variant: "destructive"
       });
-      setIsLoading(false);
       return;
     }
 
@@ -44,32 +44,35 @@ const AuthPage = () => {
         description: "Please confirm your password correctly.",
         variant: "destructive"
       });
-      setIsLoading(false);
       return;
     }
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    toast({
-      title: isLogin ? "Login successful!" : "Account created!",
-      description: isLogin 
-        ? "Welcome back to Instagram Agent!" 
-        : "Your account has been created successfully!"
-    });
-
-    setIsLoading(false);
+    if (isLogin) {
+      loginMutation.mutate({
+        email: formData.email,
+        password: formData.password,
+      });
+    } else {
+      signupMutation.mutate({
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+      });
+    }
   };
 
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
     setFormData({
-      name: '',
+      fullName: '',
       email: '',
       password: '',
       confirmPassword: ''
     });
   };
+  
+  const isLoading = signupMutation.isPending || loginMutation.isPending;
 
   return (
     <div className="min-h-screen bg-background-light flex items-center justify-center p-4">
@@ -111,10 +114,10 @@ const AuthPage = () => {
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-text-muted" />
                   <Input
-                    id="name"
-                    name="name"
+                    id="fullName"
+                    name="fullName"
                     type="text"
-                    value={formData.name}
+                    value={formData.fullName}
                     onChange={handleInputChange}
                     placeholder="Your full name"
                     className="pl-10 h-12 border-border focus:border-input-focus transition-colors"
