@@ -14,10 +14,55 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String      @id @default(uuid())
+  email     String      @unique
   password  String
   fullName  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  posts     Post[]
+  analytics Analytics[]
+}
+
+model Post {
+  id             String      @id @default(uuid())
+  prompt         String
+  type           PostType
+  optionA        Json        // { caption: string; hashtags: string[] }
+  optionB        Json        // { caption: string; hashtags: string[] }
+  selectedOption String?     // "A" | "B" | null
+  aiModel        String?     // Which AI model was used (openai/google)
+  responseTime   Int?        // Response time in milliseconds
+  createdAt      DateTime    @default(now())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id])
+  analytics      Analytics[]
+  
+  @@index([userId])
+}
+
+enum PostType {
+  POST
+  STORY
+}
+
+model Analytics {
+  id                String   @id @default(uuid())
+  postId            String
+  post              Post     @relation(fields: [postId], references: [id])
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  selectedOption    String   // "A" or "B"
+  aiModel           String   // openai/google
+  promptLength      Int
+  captionLength     Int
+  hashtagCount      Int
+  engagementScore   Float?   // Future: can track actual engagement
+  userSatisfaction  Int?     // Future: 1-5 rating
+  responseTime      Int      // Response time in milliseconds
+  createdAt         DateTime @default(now())
+  
+  @@index([userId])
+  @@index([aiModel])
+  @@index([createdAt])
 }
