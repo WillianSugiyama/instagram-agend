@@ -1,7 +1,7 @@
 import React from 'react';
-import { Camera, LogOut, User } from 'lucide-react';
+import { Camera, LogOut, User, BarChart, Clock } from 'lucide-react';
 import { useAuthStore } from '@/stores/auth.store';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 const Header = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -24,7 +25,7 @@ const Header = () => {
   return (
     <header className="bg-background border-b border-border shadow-soft sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-3">
           <div className="p-2 rounded-lg gradient-primary">
             <Camera className="h-6 w-6 text-white" />
           </div>
@@ -32,16 +33,37 @@ const Header = () => {
             <h1 className="text-xl font-bold text-gradient">Instagram Agent</h1>
             <p className="text-xs text-text-muted">AI Content Creator</p>
           </div>
-        </div>
+        </Link>
         
         <nav className="flex items-center space-x-6">
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors font-medium">
-              Generator
-            </a>
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors font-medium">
-              History
-            </a>
+            <Link 
+              to="/" 
+              className={`flex items-center space-x-2 font-medium transition-colors ${
+                location.pathname === '/' ? 'text-primary' : 'text-text-secondary hover:text-primary'
+              }`}
+            >
+              <Camera className="h-4 w-4" />
+              <span>Generator</span>
+            </Link>
+            <Link 
+              to="/history" 
+              className={`flex items-center space-x-2 font-medium transition-colors ${
+                location.pathname === '/history' ? 'text-primary' : 'text-text-secondary hover:text-primary'
+              }`}
+            >
+              <Clock className="h-4 w-4" />
+              <span>History</span>
+            </Link>
+            <Link 
+              to="/analytics" 
+              className={`flex items-center space-x-2 font-medium transition-colors ${
+                location.pathname === '/analytics' ? 'text-primary' : 'text-text-secondary hover:text-primary'
+              }`}
+            >
+              <BarChart className="h-4 w-4" />
+              <span>Analytics</span>
+            </Link>
           </div>
           {isAuthenticated && user ? (
             <DropdownMenu>

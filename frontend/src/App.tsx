@@ -6,6 +6,8 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
+import Analytics from "./pages/Analytics";
+import History from "./pages/History";
 import NotFound from "./pages/NotFound";
 
 const AppRoutes = () => {
@@ -25,6 +27,16 @@ const AppRoutes = () => {
       <Route path="/" element={
         <ProtectedRoute>
           <Index />
+        </ProtectedRoute>
+      } />
+      <Route path="/analytics" element={
+        <ProtectedRoute>
+          <Analytics />
+        </ProtectedRoute>
+      } />
+      <Route path="/history" element={
+        <ProtectedRoute>
+          <History />
         </ProtectedRoute>
       } />
       <Route path="*" element={<NotFound />} />

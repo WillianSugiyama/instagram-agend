@@ -3,7 +3,6 @@ import Header from '@/components/Header';
 import ContentGenerator from '@/components/ContentGenerator';
 import ABTestResults from '@/components/ABTestResults';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
-import HistorySection from '@/components/HistorySection';
 import { useToast } from '@/hooks/use-toast';
 import { useCreatePost, useUpdatePostSelection, useUserPosts } from '@/hooks/usePosts';
 
@@ -11,18 +10,6 @@ interface ContentOption {
   id: string;
   caption: string;
   hashtags: string[];
-}
-
-interface HistoryItem {
-  id: string;
-  prompt: string;
-  contentType: 'post' | 'story';
-  selectedOption: 'A' | 'B';
-  selectedContent: {
-    caption: string;
-    hashtags: string[];
-  };
-  createdAt: Date;
 }
 
 const Index = () => {
@@ -55,16 +42,6 @@ const Index = () => {
 
   const currentPostData = posts?.find(p => p.id === currentPost);
   const showResults = currentPostData && !createPostMutation.isPending;
-  
-  // Transform posts to history format
-  const history = posts?.filter(p => p.selectedOption)?.map(post => ({
-    id: post.id,
-    prompt: post.prompt,
-    contentType: post.type.toLowerCase() as 'post' | 'story',
-    selectedOption: post.selectedOption as 'A' | 'B',
-    selectedContent: post.selectedOption === 'A' ? post.optionA : post.optionB,
-    createdAt: new Date(post.createdAt),
-  })) || [];
 
   return (
     <div className="min-h-screen bg-background-light">
@@ -84,12 +61,12 @@ const Index = () => {
           <section className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-text-primary mb-2">
-                {createPostMutation.isPending ? 'Gerando suas opções...' : 'Escolha sua opção favorita'}
+                {createPostMutation.isPending ? 'Generating your options...' : 'Choose your favorite option'}
               </h2>
               <p className="text-text-secondary">
                 {createPostMutation.isPending 
-                  ? 'Nossa IA está criando duas versões únicas para você comparar'
-                  : 'Compare as duas opções e selecione a que mais combina com você'
+                  ? 'Our AI is creating two unique versions for you to compare'
+                  : 'Compare both options and select the one that best suits you'
                 }
               </p>
             </div>
@@ -107,11 +84,6 @@ const Index = () => {
             )}
           </section>
         )}
-
-        {/* History Section */}
-        <section className="max-w-6xl mx-auto">
-          <HistorySection history={history} />
-        </section>
       </main>
     </div>
   );

@@ -27,20 +27,20 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history }) => {
       const text = `${content.caption}\n\n${content.hashtags.join(' ')}`;
       await navigator.clipboard.writeText(text);
       toast({
-        title: "Copiado!",
-        description: "Conteúdo copiado para a área de transferência."
+        title: "Copied!",
+        description: "Content copied to clipboard."
       });
     } catch (err) {
       toast({
-        title: "Erro",
-        description: "Não foi possível copiar o conteúdo.",
+        title: "Error",
+        description: "Could not copy content.",
         variant: "destructive"
       });
     }
   };
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('pt-BR', {
+    return new Intl.DateTimeFormat('en-US', {
       day: '2-digit',
       month: 'short',
       hour: '2-digit',
@@ -54,10 +54,10 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history }) => {
         <Clock className="h-8 w-8 text-text-muted" />
       </div>
       <h3 className="text-lg font-semibold text-text-primary mb-2">
-        Nenhum histórico ainda
+        No history yet
       </h3>
       <p className="text-text-secondary max-w-md mx-auto">
-        Quando você gerar seu primeiro conteúdo, ele aparecerá aqui para você acessar e reutilizar.
+        When you generate your first content, it will appear here for you to access and reuse.
       </p>
     </div>
   );
@@ -74,11 +74,11 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history }) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-text-primary">Histórico</h2>
-          <p className="text-text-secondary">Seus conteúdos gerados recentemente</p>
+          <h2 className="text-2xl font-bold text-text-primary">History</h2>
+          <p className="text-text-secondary">Your recently generated content</p>
         </div>
         <div className="text-sm text-text-muted">
-          {history.length} {history.length === 1 ? 'item' : 'itens'}
+          {history.length} {history.length === 1 ? 'item' : 'items'}
         </div>
       </div>
 
@@ -122,7 +122,7 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history }) => {
               <div className="flex items-center space-x-2">
                 <div className="inline-flex items-center px-2 py-1 rounded-full bg-success/10 text-success text-xs font-medium">
                   <Check className="h-3 w-3 mr-1" />
-                  Opção {item.selectedOption}
+                  Option {item.selectedOption}
                 </div>
               </div>
             </div>
@@ -159,7 +159,7 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history }) => {
               className="w-full opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <Copy className="h-4 w-4 mr-2" />
-              Copiar conteúdo
+              Copy content
             </Button>
           </div>
         ))}

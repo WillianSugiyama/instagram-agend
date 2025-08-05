@@ -18,8 +18,8 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onGenerate, isLoadi
     e.preventDefault();
     if (!prompt.trim()) {
       toast({
-        title: "Prompt necessário",
-        description: "Por favor, descreva o conteúdo que deseja criar.",
+        title: "Prompt required",
+        description: "Please describe the content you want to create.",
         variant: "destructive"
       });
       return;
@@ -37,10 +37,10 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onGenerate, isLoadi
           <Sparkles className="h-6 w-6 text-white" />
         </div>
         <h2 className="text-2xl font-bold text-text-primary mb-2">
-          Crie Conteúdo Incrível
+          Create Amazing Content
         </h2>
         <p className="text-text-secondary">
-          Descreva sua ideia e deixe a IA criar opções únicas para você escolher
+          Describe your idea and let AI create unique options for you to choose
         </p>
       </div>
 
@@ -70,14 +70,14 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onGenerate, isLoadi
         {/* Prompt Textarea */}
         <div className="space-y-2">
           <label htmlFor="prompt" className="block text-sm font-semibold text-text-primary">
-            Descreva seu conteúdo
+            Describe your content
           </label>
           <div className="relative">
             <Textarea
               id="prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Ex: Uma foto de café da manhã saudável com aveia, frutas vermelhas e mel, com uma vibe aconchegante e natural..."
+              placeholder="Ex: A healthy breakfast photo with oats, berries, and honey, with a cozy and natural vibe..."
               className="min-h-[120px] resize-none border-border focus:border-input-focus transition-colors"
               maxLength={maxChars}
             />
@@ -96,12 +96,12 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onGenerate, isLoadi
           {isLoading ? (
             <>
               <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-              Gerando conteúdo...
+              Generating content...
             </>
           ) : (
             <>
               <Sparkles className="h-5 w-5 mr-2" />
-              Gerar Conteúdo
+              Generate Content
             </>
           )}
         </Button>

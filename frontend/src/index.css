@@ -259,4 +259,59 @@
     @apply text-primary-foreground;
     background: var(--primary-gradient);
   }
+
+  /* Story Preview Styles */
+  .story-preview-container {
+    @apply flex justify-center items-center;
+  }
+
+  .story-preview {
+    @apply relative w-full max-w-[375px] h-[667px] bg-black rounded-[40px] overflow-hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .story-header {
+    @apply absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  }
+
+  .story-content {
+    @apply relative w-full h-full;
+    background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);
+  }
+
+  .story-text-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center p-8 text-center;
+  }
+
+  .story-caption {
+    @apply text-white text-2xl font-bold mb-4 leading-tight;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .story-hashtags {
+    @apply flex flex-wrap justify-center gap-2;
+  }
+
+  .story-hashtag {
+    @apply text-white text-sm font-medium px-3 py-1 rounded-full;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .story-footer {
+    @apply absolute bottom-0 left-0 right-0 p-4;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  }
+
+  .story-input-area {
+    @apply relative;
+  }
+
+  .story-input {
+    @apply w-full px-4 py-3 rounded-full text-white placeholder-gray-300 text-sm;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
 }
