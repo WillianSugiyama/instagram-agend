@@ -1,8 +1,14 @@
 export default () => {
+  const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
+
+  const origins = corsOrigin.includes(',') 
+    ? corsOrigin.split(',').map(origin => origin.trim())
+    : corsOrigin;
+
   return {
     port: parseInt(process.env.PORT!, 10) || 3000,
     cors: {
-      origin: process.env.CORS_ORIGIN || 'http://localhost:8081',
+      origin: origins,
       credentials: true,
     },
     database: {
