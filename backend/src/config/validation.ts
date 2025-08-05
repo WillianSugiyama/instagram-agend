@@ -5,7 +5,7 @@ export const validationSchema = Joi.object({
     .valid('development', 'production', 'test')
     .default('development'),
   PORT: Joi.number().default(3000),
-  CORS_ORIGIN: Joi.string().default('http://localhost:8081'),
+  CORS_ORIGIN: Joi.string().default('https://instagram-agend.vercel.app/'),
   DATABASE_URL: Joi.string().required(),
   JWT_SECRET: Joi.string().required(),
   OPENAI_KEY: Joi.string().required(),
