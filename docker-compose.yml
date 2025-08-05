@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: instagram-agent-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-instagram}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-instagram123}
+      POSTGRES_DB: ${DB_NAME:-instagram_agent}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - instagram-agent-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-instagram}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: instagram-agent-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://${DB_USER:-instagram}:${DB_PASSWORD:-instagram123}@postgres:5432/${DB_NAME:-instagram_agent}?schema=public
+      
+      # JWT
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
+      
+      # AI Services
+      OPENAI_KEY: ${OPENAI_KEY}
+      GOOGLE_AI_API_KEY: ${GOOGLE_AI_API_KEY}
+      
+      # Node environment
+      NODE_ENV: ${NODE_ENV:-production}
+      
+      # Application
+      PORT: 3000
+      
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - instagram-agent-network
+    volumes:
+      - ./backend/prisma:/app/prisma
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        node dist/src/main.js
+      "
+
+networks:
+  instagram-agent-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
